@@ -39,9 +39,9 @@ router.get('/', (req, res) => {
         file.write('Test create_proposal' + '\n\n');
         file.write('Params: wif: ' + wif + ', creator: ' + testingAccount + ', receiver: initminer, start_date: 2019-03-18T00:00:00, end_date: 2019-04-01T00:00:00, daily_pay: 5.000 TBD, subject: this is example, url: http://url.html' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
@@ -49,9 +49,9 @@ router.get('/', (req, res) => {
         file.write('Test update_proposal_votes' + '\n\n');
         file.write('Params: wif: ' + wif + ', voter: ' + testingAccount + ', proposal_ids: [0], approve: true' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
@@ -59,9 +59,9 @@ router.get('/', (req, res) => {
         file.write('Test remove_proposal' + '\n\n');
         file.write('Params: wif: ' + wif + ', proposal_owner: ' + testingAccount + ', proposal_ids: [0]' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
@@ -69,9 +69,9 @@ router.get('/', (req, res) => {
         file.write('Test find_proposals' + '\n\n');
         file.write('Params: id_set: [0]' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
@@ -79,9 +79,9 @@ router.get('/', (req, res) => {
         file.write('Test list_proposals' + '\n\n');
         file.write('Params: start: ' + testingAccount + ', order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
@@ -89,9 +89,9 @@ router.get('/', (req, res) => {
         file.write('Test list_voter_proposals' + '\n\n');
         file.write('Params: voter: ' + testingAccount + ', order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1' + '\n');
         if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result) + '\n\n\n');
+            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
         }
     });
 
