@@ -5,95 +5,175 @@ import steem from '@steemit/steem-js';
 const router = Router();
 
 router.get('/', (req, res) => {
+
     // set config
-    var configUrl = 'http://192.168.6.100:8090';
-    var testingAccount = 'initminer';
+    var name_of_file = 'test-a';
+    var api_url = 'http://192.168.6.100:8090';
     var wif = '5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV';
+    var creator = 'initminer';
+    var receiver = 'initminer';
+    var start_date = '2019-03-18T00:00:00';
+    var end_date = '2019-04-01T00:00:00';
+    var daily_pay = '5.000 TBD';
+    var subject = 'this is example';
+    var url = 'http://url.html';
+    var voter = 'initminer';
+    var proposal_ids = [0];
+    var approve = true;
+    var proposal_owner = 'initminer';
+    var id_set = [0];
+    var start = 'initminer';
+    var order_by = 'by_creator';
+    var order_direction = 'direction_ascending';
+    var limit = 5;
+    var active = -1;
+    var method_operation = 'all';
+
     if (req.query) {
-        if (req.query.urlHost) {
-            configUrl = req.query.urlHost;
+        if (req.query.name_of_file) {
+            name_of_file = req.query.name_of_file;
         }
-        if (req.query.account) {
-            testingAccount = req.query.account;
+        if (req.query.api_url) {
+            api_url = req.query.api_url;
         }
-        if (req.query.wif) {
-            wif = req.query.wif;
+        if (req.query.creator) {
+            creator = req.query.creator;
+        }
+        if (req.query.receiver) {
+            receiver = req.query.receiver;
+        }
+        if (req.query.start_date) {
+            start_date = req.query.start_date;
+        }
+        if (req.query.daily_pay) {
+            daily_pay = req.query.daily_pay;
+        }
+        if (req.query.subject) {
+            subject = req.query.subject;
+        }
+        if (req.query.url) {
+            url = req.query.url;
+        }
+        if (req.query.voter) {
+            voter = req.query.voter;
+        }
+        if (req.query.proposal_ids) {
+            proposal_ids = req.query.proposal_ids;
+        }
+        if (req.query.approve) {
+            approve = req.query.approve;
+        }
+        if (req.query.proposal_owner) {
+            proposal_owner = req.query.proposal_owner;
+        }
+        if (req.query.id_set) {
+            id_set = req.query.id_set;
+        }
+        if (req.query.start) {
+            start = req.query.start;
+        }
+        if (req.query.order_by) {
+            order_by = req.query.order_by;
+        }
+        if (req.query.order_direction) {
+            order_direction = req.query.order_direction;
+        }
+        if (req.query.limit) {
+            limit = req.query.limit;
+        }
+        if (req.query.active) {
+            active = req.query.active;
+        }
+        if (req.query.method_operation) {
+            method_operation = req.query.method_operation;
         }
     }
     steem.api.setOptions({
         address_prefix: 'TST',
         chain_id: '18dcf0a285365fc58b71f18b3d3fec954aa0c141c44e4e5cb4cf777b9eab274e',
-        url: configUrl,
+        url: api_url,
         retry: true,
-        useAppbaseApi: !!configUrl,
+        useAppbaseApi: !!api_url,
     });
 
     steem.config.set('address_prefix', 'TST');
     steem.config.set('chain_id', '18dcf0a285365fc58b71f18b3d3fec954aa0c141c44e4e5cb4cf777b9eab274e');
     steem.config.set('transport', 'http');
-    steem.config.set('uri', configUrl);
+    steem.config.set('uri', api_url);
 
-    var file = fs.createWriteStream('test/test-a.txt');
+    var file = fs.createWriteStream('test/' + name_of_file + '.txt');
 
-    steem.broadcast.createProposal(wif, 'initminer', 'initminer', '2019-03-18T00:00:00', '2019-04-01T00:00:00', '5.000 TBD', 'this is example', 'http://url.html', function(err, result) {
-        file.write('Test create_proposal' + '\n\n');
-        file.write('Params: wif: ' + wif + ', creator: ' + testingAccount + ', receiver: initminer, start_date: 2019-03-18T00:00:00, end_date: 2019-04-01T00:00:00, daily_pay: 5.000 TBD, subject: this is example, url: http://url.html' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'create_proposal')) {
+        steem.broadcast.createProposal(wif, creator, receiver, start_date, end_date, daily_pay, subject, url, function(err, result) {
+            file.write('Test create_proposal' + '\n\n');
+            file.write('Params: wif: ' + wif + ', creator: ' + creator + ', receiver: ' + receiver + ', start_date: ' + start_date + ', end_date: ' + end_date + ', daily_pay: ' + daily_pay + ', subject: ' + subject + ', url: ' + url + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
-    steem.broadcast.updateProposalVotes(wif, 'initminer', [0], true, function(err, result) {
-        file.write('Test update_proposal_votes' + '\n\n');
-        file.write('Params: wif: ' + wif + ', voter: ' + testingAccount + ', proposal_ids: [0], approve: true' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'update_proposal_votes')) {
+        steem.broadcast.updateProposalVotes(wif, voter, proposal_ids, approve, function(err, result) {
+            file.write('Test update_proposal_votes' + '\n\n');
+            file.write('Params: wif: ' + wif + ', voter: ' + voter + ', proposal_ids: ' + proposal_ids + ', approve: ' + approve + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
-    steem.broadcast.removeProposal(wif, 'initminer', [0], function(err, result) {
-        file.write('Test remove_proposal' + '\n\n');
-        file.write('Params: wif: ' + wif + ', proposal_owner: ' + testingAccount + ', proposal_ids: [0]' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'remove_proposal')) {
+        steem.broadcast.removeProposal(wif, proposal_owner, proposal_ids, function(err, result) {
+            file.write('Test remove_proposal' + '\n\n');
+            file.write('Params: wif: ' + wif + ', proposal_owner: ' + proposal_owner + ', proposal_ids: ' + proposal_ids + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
-    steem.api.findProposals([0], function(err, result) {
-        file.write('Test find_proposals' + '\n\n');
-        file.write('Params: id_set: [0]' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'find_proposals')) {
+        steem.api.findProposals(id_set, function(err, result) {
+            file.write('Test find_proposals' + '\n\n');
+            file.write('Params: id_set: ' + id_set + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
-    steem.api.listProposals(testingAccount, 'by_creator', 'direction_ascending', 5, -1, function(err, result) {
-        file.write('Test list_proposals' + '\n\n');
-        file.write('Params: start: ' + testingAccount + ', order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'list_proposals')) {
+        steem.api.listProposals(start, order_by, order_direction, limit, active, function(err, result) {
+            file.write('Test list_proposals' + '\n\n');
+            file.write('Params: start: ' + start + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', active: ' + active + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
-    steem.api.listVoterProposals(testingAccount, 'by_creator', 'direction_ascending', 5, -1, function(err, result) {
-        file.write('Test list_voter_proposals' + '\n\n');
-        file.write('Params: voter: ' + testingAccount + ', order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1' + '\n');
-        if (err) {
-            file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        } else if (result) {
-            file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
-        }
-    });
+    if ((method_operation === 'all') || (method_operation === 'list_voter_proposals')) {
+        steem.api.listVoterProposals(voter, order_by, order_direction, limit, active, function(err, result) {
+            file.write('Test list_voter_proposals' + '\n\n');
+            file.write('Params: voter: ' + voter + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', active: ' + active + '\n');
+            if (err) {
+                file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            } else if (result) {
+                file.write('Rresponse: ' + JSON.stringify(result).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
+            }
+        });
+    }
 
     res.send({ status: steem }).end();
 });
