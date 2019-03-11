@@ -55,11 +55,11 @@ It is possible with GET parameters to change name of file, api url and methods/o
 
 Creator/wif, voter/wif and proposal_owner/wif params must be passed both. There are relations between them.
 
-It is also possible to choose only one method or operation if passed with method_operation GET parameter
+It is also possible to choose only one method or operation if method_operation GET parameter is passed.
 (create_proposal, update_proposal_votes, remove_proposal, find_proposals, list_proposals, list_voter_proposals).
 If method_operation GET parameter is not passed, all methods and operations are tested.
 
-Example curl:
+Curl example:
 
 ```
 curl --request GET --url http://localhost:8080/test-a --data '{}'
