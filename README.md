@@ -1,3 +1,35 @@
+Steem-js-testdriver
+===================
+
+## Installation
+
+Firstly it is needed to clone master branch with correct steem-js submodule:
+
+```
+git clone --recurse-submodules https://github.com/blocktradesdevs/steem-js-testdriver.git
+```
+
+Installation of packages:
+
+```
+cd steem-js-testdriver
+cd steem-js
+git checkout sps-develop2
+git pull
+npm link
+cd ./../
+npm install
+npm link steem-js
+```
+
+Starting server:
+
+```
+npm start
+```
+
+## GET parameters
+
 It is possible with GET parameters to change name of file, api url and methods/operations input params:
 
 - name_of_file - default is test-a
@@ -27,6 +59,10 @@ It is also possible to choose only one method or operation if passed with method
 (create_proposal, update_proposal_votes, remove_proposal, find_proposals, list_proposals, list_voter_proposals).
 If method_operation GET parameter is not passed, all methods and operations are tested.
 
-Example curl: curl --request GET --url http://localhost:8080/test-a --data '{}'
+Example curl:
+
+```
+curl --request GET --url http://localhost:8080/test-a --data '{}'
+```
 
 Result of tests there is in folder 'test'.
