@@ -33,7 +33,7 @@ npm start
 It is possible with GET parameters to change name of file, api url and methods/operations input params:
 
 - name_of_file - default is test-a
-- api_url - default is http://192.168.6.100:8090
+- api_url - default is http://sps-blocktrades-testnet-api.blocktrades.info:8090
 - wif - default is 5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV
 - creator - default is initminer
 - receiver - default is initminer
@@ -41,7 +41,7 @@ It is possible with GET parameters to change name of file, api url and methods/o
 - end_date - default is 2019-04-01T00:00:00
 - daily_pay - default is 5.000 TBD
 - subject - default is this is example
-- url - default is http://url.html
+- permlink - default is http://url.html
 - voter - default is initminer
 - proposal_ids - default is [0]
 - approve - default is true
@@ -51,7 +51,7 @@ It is possible with GET parameters to change name of file, api url and methods/o
 - order_by - default is by_creator
 - order_direction - default is direction_ascending
 - limit - default is 5
-- active - default is -1
+- active - default is all
 
 Creator/wif, voter/wif and proposal_owner/wif params must be passed both. There are relations between them.
 

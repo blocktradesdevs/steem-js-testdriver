@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
     // set config
     var name_of_file = 'test-a';
-    var api_url = 'http://192.168.6.100:8090';
+    var api_url = 'http://sps-blocktrades-testnet-api.blocktrades.info:8090';
     var wif = '5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV';
     var creator = 'initminer';
     var receiver = 'initminer';
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     var end_date = '2019-04-01T00:00:00';
     var daily_pay = '5.000 TBD';
     var subject = 'this is example';
-    var url = 'http://url.html';
+    var permlink = 'http://url.html';
     var voter = 'initminer';
     var proposal_ids = [0];
     var approve = true;
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
     var order_by = 'by_creator';
     var order_direction = 'direction_ascending';
     var limit = 5;
-    var active = -1;
+    var active = 'all';
     var method_operation = 'all';
 
     if (req.query) {
@@ -51,8 +51,8 @@ router.get('/', (req, res) => {
         if (req.query.subject) {
             subject = req.query.subject;
         }
-        if (req.query.url) {
-            url = req.query.url;
+        if (req.query.permlink) {
+            permlink = req.query.permlink;
         }
         if (req.query.voter) {
             voter = req.query.voter;
@@ -104,9 +104,9 @@ router.get('/', (req, res) => {
     var file = fs.createWriteStream('test/' + name_of_file + '.txt');
 
     if ((method_operation === 'all') || (method_operation === 'create_proposal')) {
-        steem.broadcast.createProposal(wif, creator, receiver, start_date, end_date, daily_pay, subject, url, function(err, result) {
+        steem.broadcast.createProposal(wif, creator, receiver, start_date, end_date, daily_pay, subject, permlink, function(err, result) {
             file.write('Test create_proposal' + '\n\n');
-            file.write('Params: wif: ' + wif + ', creator: ' + creator + ', receiver: ' + receiver + ', start_date: ' + start_date + ', end_date: ' + end_date + ', daily_pay: ' + daily_pay + ', subject: ' + subject + ', url: ' + url + '\n');
+            file.write('Params: wif: ' + wif + ', creator: ' + creator + ', receiver: ' + receiver + ', start_date: ' + start_date + ', end_date: ' + end_date + ', daily_pay: ' + daily_pay + ', subject: ' + subject + ', permlink: ' + permlink + '\n');
             if (err) {
                 file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
             } else if (result) {

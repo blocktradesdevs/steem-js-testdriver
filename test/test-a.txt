@@ -1,0 +1,196 @@
+Test find_proposals
+
+Params: id_set: 0
+Rresponse: []
+
+
+Test list_proposals
+
+Params: start: initminer, order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1
+Rresponse: [{
+"id":1,
+"creator":"initminer",
+"receiver":"treasury",
+"start_date":"2019-03-12T16:54:35",
+"end_date":"2019-03-14T16:54:35",
+"daily_pay":{
+"amount":"16000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"bc5e9b95-070a-474c-a032-6599f6154626",
+"url":"mypermlink",
+"total_votes":0},
+{
+"id":5,
+"creator":"initminer",
+"receiver":"treasury",
+"start_date":"2019-03-12T17:11:57",
+"end_date":"2019-03-14T17:11:57",
+"daily_pay":{
+"amount":"16000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"183f16ff-b0d6-4649-891b-b9713e66e3ce",
+"url":"mypermlink",
+"total_votes":0},
+{
+"id":7,
+"creator":"initminer",
+"receiver":"initminer",
+"start_date":"2019-03-18T00:00:00",
+"end_date":"2019-04-01T00:00:00",
+"daily_pay":{
+"amount":"5000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"this is example",
+"url":"http://url.html",
+"total_votes":0},
+{
+"id":15,
+"creator":"initminer",
+"receiver":"initminer",
+"start_date":"2019-03-18T00:00:00",
+"end_date":"2019-04-01T00:00:00",
+"daily_pay":{
+"amount":"5000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"this is example",
+"url":"http://url.html",
+"total_votes":0},
+{
+"id":16,
+"creator":"initminer",
+"receiver":"initminer",
+"start_date":"2019-03-18T00:00:00",
+"end_date":"2019-04-01T00:00:00",
+"daily_pay":{
+"amount":"5000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"this is example",
+"url":"http://url.html",
+"total_votes":0}]
+
+
+Test list_voter_proposals
+
+Params: voter: initminer, order_by: by_creator, order_direction: direction_ascending, limit: 5, active: -1
+Rresponse: [{
+"id":1,
+"creator":"initminer",
+"receiver":"treasury",
+"start_date":"2019-03-12T16:54:35",
+"end_date":"2019-03-14T16:54:35",
+"daily_pay":{
+"amount":"16000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"bc5e9b95-070a-474c-a032-6599f6154626",
+"url":"mypermlink",
+"total_votes":0},
+{
+"id":5,
+"creator":"initminer",
+"receiver":"treasury",
+"start_date":"2019-03-12T17:11:57",
+"end_date":"2019-03-14T17:11:57",
+"daily_pay":{
+"amount":"16000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"183f16ff-b0d6-4649-891b-b9713e66e3ce",
+"url":"mypermlink",
+"total_votes":0},
+{
+"id":6,
+"creator":"pychol",
+"receiver":"pychol",
+"start_date":"2019-03-12T10:00:00",
+"end_date":"2019-06-01T00:00:00",
+"daily_pay":{
+"amount":"161000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"this is proposal number 1",
+"url":"http://url.html",
+"total_votes":255652653},
+{
+"id":6,
+"creator":"pychol",
+"receiver":"pychol",
+"start_date":"2019-03-12T10:00:00",
+"end_date":"2019-06-01T00:00:00",
+"daily_pay":{
+"amount":"161000",
+"precision":3,
+"nai":"@@000000013"},
+"subject":"this is proposal number 1",
+"url":"http://url.html",
+"total_votes":255652653}]
+
+
+Test remove_proposal
+
+Params: wif: 5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV, proposal_owner: initminer, proposal_ids: 0
+Rresponse: {
+"id":"820c0e9d53445a99b9cec5c990569ee108df7918",
+"block_num":88972,
+"trx_num":2,
+"expired":false,
+"ref_block_num":23413,
+"ref_block_prefix":1025592907,
+"expiration":"2019-03-12T14:29:45",
+"operations":[["remove_proposal",
+{
+"proposal_owner":"initminer",
+"proposal_ids":["0"]}]],
+"extensions":[],
+"signatures":["1f1886b619d7c927a14524296ce59cdae4787fc583196799edca7ff9f63d1c70632555af021f504f39794e8b6db973265366e04035e11f8ac0cf8d5b8db427503f"]}
+
+
+Test update_proposal_votes
+
+Params: wif: 5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV, voter: initminer, proposal_ids: 0, approve: true
+Rresponse: {
+"id":"ff10f01824d9aff5dcf2bef6d7c2769de4a89064",
+"block_num":88972,
+"trx_num":0,
+"expired":false,
+"ref_block_num":23413,
+"ref_block_prefix":1025592907,
+"expiration":"2019-03-12T14:29:45",
+"operations":[["update_proposal_votes",
+{
+"voter":"initminer",
+"proposal_ids":["0"],
+"approve":true}]],
+"extensions":[],
+"signatures":["207b1fec6caf7b61854f915d21cf9195a5e92843f051a730ed553ca2dc003cca98696d6467c6290da46bddc548ee827f410918671b991d79bfca2aee38ea99820b"]}
+
+
+Test create_proposal
+
+Params: wif: 5HuVghGZvimhc5wkNA574wsDPwrsRfYrMAoh7UwHn8kQ5D8YZZV, creator: initminer, receiver: initminer, start_date: 2019-03-18T00:00:00, end_date: 2019-04-01T00:00:00, daily_pay: 5.000 TBD, subject: this is example, permlink: http://url.html
+Rresponse: {
+"id":"89306663f873f68e611fcea7eb883baa765da3d2",
+"block_num":88972,
+"trx_num":1,
+"expired":false,
+"ref_block_num":23413,
+"ref_block_prefix":1025592907,
+"expiration":"2019-03-12T14:29:45",
+"operations":[["create_proposal",
+{
+"creator":"initminer",
+"receiver":"initminer",
+"start_date":"2019-03-18T00:00:00",
+"end_date":"2019-04-01T00:00:00",
+"daily_pay":"5.000 TBD",
+"subject":"this is example",
+"url":"http://url.html"}]],
+"extensions":[],
+"signatures":["1f13708e8fde8458eb2e8e665d006ee6dd58a84a3feca9dabb67d438dc67a55c1652a82d184f896dd755da1cce201d0c71d0e44ae0c40d77af695af06029ee0ae9"]}
+
+
