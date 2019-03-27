@@ -26,8 +26,9 @@ router.get('/', (req, res) => {
     var order_by = 'by_creator';
     var order_direction = 'direction_ascending';
     var limit = 5;
-    var active = 'all';
+    var status = 'all';
     var method_operation = 'all';
+    var last_id = null;
 
     if (req.query) {
         if (req.query.name_of_file) {
@@ -81,11 +82,14 @@ router.get('/', (req, res) => {
         if (req.query.limit) {
             limit = req.query.limit;
         }
-        if (req.query.active) {
-            active = req.query.active;
+        if (req.query.status) {
+            status = req.query.status;
         }
         if (req.query.method_operation) {
             method_operation = req.query.method_operation;
+        }
+        if (req.query.last_id) {
+            last_id = req.query.last_id;
         }
     }
     steem.api.setOptions({
@@ -152,9 +156,9 @@ router.get('/', (req, res) => {
     }
 
     if ((method_operation === 'all') || (method_operation === 'list_proposals')) {
-        steem.api.listProposals(start, order_by, order_direction, limit, active, function(err, result) {
+        steem.api.listProposals(start, order_by, order_direction, limit, status, 2, function(err, result) {
             file.write('Test list_proposals' + '\n\n');
-            file.write('Params: start: ' + start + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', active: ' + active + '\n');
+            file.write('Params: start: ' + start + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', status: ' + status + ', last_id: ' + last_id + '\n');
             if (err) {
                 file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
             } else if (result) {
@@ -164,9 +168,9 @@ router.get('/', (req, res) => {
     }
 
     if ((method_operation === 'all') || (method_operation === 'list_voter_proposals')) {
-        steem.api.listVoterProposals(voter, order_by, order_direction, limit, active, function(err, result) {
+        steem.api.listVoterProposals(start, order_by, order_direction, limit, status, function(err, result) {
             file.write('Test list_voter_proposals' + '\n\n');
-            file.write('Params: voter: ' + voter + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', active: ' + active + '\n');
+            file.write('Params: start: ' + start + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', status: ' + status + '\n');
             if (err) {
                 file.write('Rresponse: ' + JSON.stringify(err).split(",").join(",\n").split("{").join("{\n") + '\n\n\n');
             } else if (result) {

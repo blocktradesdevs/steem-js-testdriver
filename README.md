@@ -51,7 +51,8 @@ It is possible with GET parameters to change name of file, api url and methods/o
 - order_by - default is by_creator
 - order_direction - default is direction_ascending
 - limit - default is 5
-- active - default is all
+- status - default is all
+- last_id - default is null
 
 Creator/wif, voter/wif and proposal_owner/wif params must be passed both. There are relations between them.
 
