@@ -156,7 +156,7 @@ router.get('/', (req, res) => {
     }
 
     if ((method_operation === 'all') || (method_operation === 'list_proposals')) {
-        steem.api.listProposals(start, order_by, order_direction, limit, status, 2, function(err, result) {
+        steem.api.listProposals(start, order_by, order_direction, limit, status, last_id, function(err, result) {
             file.write('Test list_proposals' + '\n\n');
             file.write('Params: start: ' + start + ', order_by: ' + order_by + ', order_direction: ' + order_direction + ', limit: ' + limit + ', status: ' + status + ', last_id: ' + last_id + '\n');
             if (err) {
